@@ -1,7 +1,7 @@
-package com.pastukhov.chucknorris
+package com.pastukhov.chucknorris.data
 
+import com.pastukhov.chucknorris.data.model.ChuckNorrisModel
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.http.GET
 
 

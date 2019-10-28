@@ -1,10 +1,13 @@
-package com.pastukhov.chucknorris
+package com.pastukhov.chucknorris.activities
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.pastukhov.chucknorris.data.ChackNorisService
+import com.pastukhov.chucknorris.data.model.ChuckNorrisModel
+import com.pastukhov.chucknorris.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
@@ -18,11 +21,13 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 object ChackNorisApi {
-    val service: ChackNorisService by lazy { retrofit.create(ChackNorisService::class.java) }
+    val service: ChackNorisService by lazy { retrofit.create(
+        ChackNorisService::class.java) }
 }
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
