@@ -1,7 +1,7 @@
 package com.pastukhov.chucknorris.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.pastukhov.chucknorris.data.ChackNorrisService
+import com.pastukhov.chucknorris.data.ChackNorrisServiceForCoroutine
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -25,6 +25,6 @@ class RestModule {
 
     @Provides
     @Singleton
-    fun provideChackNorrisApiService(retrofit: Retrofit): ChackNorrisService =
-        retrofit.create(ChackNorrisService::class.java)
+    fun provideChackNorrisApiService(retrofit: Retrofit): ChackNorrisServiceForCoroutine =
+        retrofit.create(ChackNorrisServiceForCoroutine::class.java)
 }

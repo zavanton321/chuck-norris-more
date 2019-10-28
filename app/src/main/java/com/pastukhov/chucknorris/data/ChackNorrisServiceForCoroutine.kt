@@ -5,7 +5,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 
 
-interface ChackNorrisService {
+interface ChackNorrisServiceForCoroutine {
     @GET("https://api.chucknorris.io/jokes/random")
     fun getRandomJoke(): Deferred<RandomJokeModel>
 }
