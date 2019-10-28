@@ -1,15 +1,17 @@
 package com.pastukhov.chucknorris.di
 
-import com.pastukhov.chucknorris.activities.MainActivity
-import com.pastukhov.chucknorris.presenter.PresenterRandomJoke
+import com.pastukhov.chucknorris.presentation.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [RestModule::class])
+@Component(
+    modules = [
+        RestModule::class,
+        MainModule::class
+    ]
+)
 @Singleton
 interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
-
-    fun inject(presenter: PresenterRandomJoke)
 }

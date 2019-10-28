@@ -1,17 +1,22 @@
-package com.pastukhov.chucknorris.activities
+package com.pastukhov.chucknorris.presentation
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.pastukhov.chucknorris.App
+import com.pastukhov.chucknorris.R
 import com.pastukhov.chucknorris.data.ChackNorisService
 import com.pastukhov.chucknorris.data.model.ChuckNorrisModel
-import com.pastukhov.chucknorris.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 private val BASE_URL = "https://api.chucknorris.io/"
 private val retrofit = Retrofit.Builder()
@@ -21,15 +26,24 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 object ChackNorisApi {
-    val service: ChackNorisService by lazy { retrofit.create(
-        ChackNorisService::class.java) }
+    val service: ChackNorisService by lazy {
+        retrofit.create(
+            ChackNorisService::class.java
+        )
+    }
 }
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IMainView {
 
-    lateinit var    
+    @Inject
+    lateinit var presenter: IMainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        App.appComponent.inject(this)
+
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -54,7 +68,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getRandomJoke(view: View) {
-
 
 
         CoroutineScope(Job() + Dispatchers.Main).launch {

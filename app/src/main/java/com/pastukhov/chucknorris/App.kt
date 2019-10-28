@@ -2,7 +2,7 @@ package com.pastukhov.chucknorris
 
 import android.app.Application
 import com.pastukhov.chucknorris.di.AppComponent
-import com.pastukhov.chucknorris.di.RestModule
+import com.pastukhov.chucknorris.di.DaggerAppComponent
 
 class App : Application() {
 
@@ -16,12 +16,7 @@ class App : Application() {
     }
 
     private fun initializeDagger() {
-
-
         appComponent = DaggerAppComponent.builder()
-            .restModule(RestModule())
             .build()
-
     }
-
 }
