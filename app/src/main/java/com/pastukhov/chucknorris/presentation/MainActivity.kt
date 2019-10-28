@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.pastukhov.chucknorris.App
 import com.pastukhov.chucknorris.R
-import com.pastukhov.chucknorris.data.ChackNorisService
-import com.pastukhov.chucknorris.data.model.ChuckNorrisModel
+import com.pastukhov.chucknorris.data.ChackNorrisService
+import com.pastukhov.chucknorris.data.model.RandomJokeModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,9 +26,9 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 object ChackNorisApi {
-    val service: ChackNorisService by lazy {
+    val SERVICE: ChackNorrisService by lazy {
         retrofit.create(
-            ChackNorisService::class.java
+            ChackNorrisService::class.java
         )
     }
 }
@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity(), IMainView {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         App.appComponent.inject(this)
-
-
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -68,16 +66,6 @@ class MainActivity : AppCompatActivity(), IMainView {
     }
 
     fun getRandomJoke(view: View) {
-
-
-        CoroutineScope(Job() + Dispatchers.Main).launch {
-            try {
-                val response = ChackNorisApi.service.getRandomJoke()
-                val joke: ChuckNorrisModel = response.await()
-                textView.text = joke.value
-            } catch (e: RuntimeException) {
-                Toast.makeText(applicationContext, "OOops!", Toast.LENGTH_SHORT).show()
-            }
-        }
+        textView.text = presenter.getRandomJoke().value
     }
 }
