@@ -4,4 +4,5 @@ import com.pastukhov.chucknorris.data.model.RandomJokeModel
 
 interface IMainPresenter {
     fun getRandomJokeCoroutine(): RandomJokeModel
+    fun getRandomJokeRxJava(): RandomJokeModel
 }

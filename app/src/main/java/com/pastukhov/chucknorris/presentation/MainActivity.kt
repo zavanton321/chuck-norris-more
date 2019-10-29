@@ -7,25 +7,11 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.pastukhov.chucknorris.App
 import com.pastukhov.chucknorris.R
 import com.pastukhov.chucknorris.data.ChackNorrisServiceForCoroutine
+import com.pastukhov.chucknorris.data.model.RandomJokeModel
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
-
-private val BASE_URL = "https://api.chucknorris.io/"
-private val retrofit = Retrofit.Builder()
-    .baseUrl(BASE_URL)
-    .addConverterFactory(GsonConverterFactory.create())
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .build()
-
-object ChackNorisApi {
-    val SERVICE_FOR_COROUTINE: ChackNorrisServiceForCoroutine by lazy {
-        retrofit.create(
-            ChackNorrisServiceForCoroutine::class.java
-        )
-    }
-}
 
 class MainActivity : AppCompatActivity(), IMainView {
 
@@ -38,6 +24,9 @@ class MainActivity : AppCompatActivity(), IMainView {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        val randomJokeRxJava: RandomJokeModel = presenter.getRandomJokeRxJava()
 
 //        interactor.getData()
 //            .subscribeOn()
@@ -61,5 +50,7 @@ class MainActivity : AppCompatActivity(), IMainView {
 
     fun getRandomJoke(view: View) {
         textView.text = presenter.getRandomJokeCoroutine().value
+        textView2.text = presenter.getRandomJokeRxJava().value
+
     }
 }
