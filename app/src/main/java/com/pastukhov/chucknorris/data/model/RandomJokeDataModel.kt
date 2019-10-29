@@ -1,7 +1,7 @@
 package com.pastukhov.chucknorris.data.model
 
 
-data class RandomJokeModel(
+data class RandomJokeDataModel(
     val id: String,
     val value: String
 )

@@ -1,11 +1,12 @@
 package com.pastukhov.chucknorris.data
 
 import com.pastukhov.chucknorris.data.model.RandomJokeDataModel
-import kotlinx.coroutines.Deferred
+import io.reactivex.Observable
 import retrofit2.http.GET
 
 
-interface ChackNorrisServiceForCoroutine {
+interface ChackNorrisService {
+
     @GET("https://api.chucknorris.io/jokes/random")
-    fun getRandomJoke(): Deferred<RandomJokeDataModel>
+    fun getRandomJoke(): Observable<RandomJokeDataModel>
 }

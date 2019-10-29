@@ -1,8 +1,12 @@
 package com.pastukhov.chucknorris.presentation
 
-import com.pastukhov.chucknorris.data.model.RandomJokeModel
+import com.pastukhov.chucknorris.data.model.RandomJokeDataModel
 
 interface IMainPresenter {
-    fun getRandomJokeCoroutine(): RandomJokeModel
-    fun getRandomJokeRxJava(): RandomJokeModel
+    fun getRandomJokeCoroutine(): RandomJokeDataModel
+
+    fun getRandomJokeRxJava()
+
+    fun attachView(view: IMainView)
+    fun detachView()
 }
